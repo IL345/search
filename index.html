@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>
+        /* styles.css */
+body {
+    font-family: Arial, sans-serif;
+    display: flex;
+    justify-content: left;
+    align-items: left;
+    height: 100vh;
+    margin: 0;
+}
+
+.search-container {
+    position: relative;
+}
+
+.search-input {
+    width: 300px;
+    padding: 10px 40px 10px 20px;
+    border: 2px solid #007BFF;
+    border-radius: 25px;
+    outline: none;
+    font-size: 16px;
+    transition: width 0.4s ease;
+}
+
+.search-input:focus {
+    width: 400px;
+}
+
+.search-button {
+    position: absolute;
+    left: 0.50px;
+    top: 4%;
+    transform: translateY(-50%);
+    border: none;
+    background: transparent;
+    font-size: 20px;
+    cursor: pointer;
+}
+
+.results {
+    margin-top: 20px;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.4s ease, opacity 0.4s ease;
+    opacity: 0;
+    border: 1px solid #007BFF;
+    border-radius: 10px;
+    background: white;
+}
+
+.results.show {
+    max-height: 200px;
+    opacity: 1;
+}
+
+.results-item {
+    padding: 10px;
+    border-bottom: 1px solid #eee;
+}
+
+.results-item:last-child {
+    border-bottom: none;
+}
+
+    </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fitur Pencarian dengan Animasi</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="search-container">
+        <input type="text" id="searchInput" placeholder="Cari sesuatu..." class="search-input">
+        <button id="searchButton" class="search-button">
+            🔍
+        </button>
+        <div id="results" class="results"></div>
+    </div>
+    <script src="script.js"></script>
+    <script>
+        // script.js
+document.addEventListener('DOMContentLoaded', () => {
+    const searchInput = document.getElementById('searchInput');
+    const resultsContainer = document.getElementById('results');
+    
+    searchInput.addEventListener('input', function() {
+        const query = searchInput.value.trim();
+        
+        // Tampilkan hasil pencarian (dummy data)
+        if (query.length > 0) {
+            // Dummy data untuk contoh
+            const dummyResults = [
+                'Hasil pencarian 1',
+                'Hasil pencarian 2',
+                'Hasil pencarian 3'
+            ];
+
+            resultsContainer.innerHTML = dummyResults
+                .filter(result => result.toLowerCase().includes(query.toLowerCase()))
+                .map(result => `<div class="results-item">${result}</div>`)
+                .join('');
+
+            resultsContainer.classList.add('show');
+        } else {
+            resultsContainer.classList.remove('show');
+        }
+    });
+});
+
+    </script>
+</body>
+</html>
